@@ -1,8 +1,8 @@
 # 📿 ચાલીસા પાઠ (Chalisa Path) — PWA Counter & Reader
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge/deploy-status)](https://chalishapath.netlify.app/)
+[![Netlify Status](https://img.shields.io/badge/Netlify-Live%20App-00C7B7?logo=netlify&logoColor=white)](https://chalishapath.netlify.app/)
 [![PWA Ready](https://img.shields.io/badge/PWA-100%25%20Offline-success?logo=pwa)](https://chalishapath.netlify.app/)
-[![Languages](https://img.shields.io/badge/Languages-ગુજરાતી%20%7C%20हिंदी%20%7C%20English-orange)](#-multi-language-support)
+[![Languages](https://img.shields.io/badge/Languages-ગુજરાતી%20%7C%20हिंदी%20%7C%20English-orange)](#-tri-lingual-support-ગુજરાતી-हिंदी-english)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **દૈનિક ચાલીસા પાઠ ગણતરી અને વાંચન માટે દિવ્ય સાથી**  
