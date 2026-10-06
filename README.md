@@ -19,12 +19,11 @@ Live App: **[https://chalishapath.netlify.app/](https://chalishapath.netlify.app
   - **iOS (iPhone/iPad):** Native Safari "Add to Home Screen" support with custom Apple touch icons, theme tinting, and notch/safe-area handling.
   - **100% Offline Ready:** Built-in Service Worker caches all assets, fonts, verses, and audio synthesis. Works completely without an active internet connection or in Airplane Mode.
 
-- 🕉️ **Five Sacred Chalisas Included:**
+- 🕉️ **Four Sacred Chalisas Included (ચાર પવિત્ર ચાલીસા):**
   - **હનુમાન ચાલીસા** (Hanuman Chalisa)
   - **શનિ ચાલીસા** (Shani Chalisa)
   - **મેલડી માતા ચાલીસા** (Meldi Mata Chalisa)
   - **શિવ ચાલીસા** (Shiv Chalisa)
-  - **શ્રી ગણેશ ચાલીસા** (Ganesh Chalisa)
 
 - 🌐 **Tri-Lingual Support (ગુજરાતી, हिंदी, English):**
   - Instant one-tap switching between **Pure Gujarati (શુદ્ધ ગુજરાતી)**, **Devanagari Hindi (हिंदी)**, and **English Transliteration / Meaning**.
