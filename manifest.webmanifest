@@ -1,0 +1,46 @@
+{
+  "id": "chalishapath-app",
+  "name": "ચાલીસા પાઠ - Chalisa Path Counter",
+  "short_name": "ચાલીસા પાઠ",
+  "description": "દૈનિક ચાલીસા પાઠ ગણતરી અને વાંચન માટે દિવ્ય સાથી",
+  "lang": "gu",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#FFFBF2",
+  "theme_color": "#B83B0E",
+  "orientation": "portrait-primary",
+  "categories": ["lifestyle", "books", "utilities"],
+  "icons": [
+    {
+      "src": "img/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="gu" data-theme="saffron">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    
+    <!-- SEO & Metadata -->
+    <title>ચાલીસા પાઠ | Chalisa Path Counter & Reader</title>
+    <meta name="description" content="મોબાઇલ માટે સુવિધાજનક ચાલીસા પાઠ કાઉન્ટર. હનુમાન, શનિ, મેલડી, ગણેશ અને શિવ ચાલીસા પાઠ સરળતાથી ગણો. શુદ્ધ ગુજરાતી, હિન્દી અને અંગ્રેજીમાં ઉપલબ્ધ.">
+    <meta name="keywords" content="Chalisa, Path Counter, Hanuman Chalisa Gujarati, Shani Chalisa Gujarati, Meldi Mata Chalisa Gujarati, Shiv Chalisa, Ganesh Chalisa, ચાલીસા પાઠ, હનુમાન ચાલીસા, મેલડી ચાલીસા, જાપ કાઉન્ટર">
+    <meta name="author" content="Aniket Mahida">
+    <link rel="canonical" href="https://chalishapath.netlify.app/">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chalishapath.netlify.app/">
+    <meta property="og:title" content="ચાલીસા પાઠ | Chalisa Path Counter">
+    <meta property="og:description" content="મોબાઇલ પર દૈનિક ચાલીસા પાઠ અને જાપ ગણતરી માટે ઉત્તમ દિવ્ય સાથી. શુદ્ધ ગુજરાતી લખાણ સાથે.">
+    <meta property="og:image" content="https://chalishapath.netlify.app/img/social-preview.png">
+    <meta property="og:locale" content="gu_IN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ચાલીસા પાઠ | Chalisa Path Counter">
+    <meta name="twitter:description" content="દૈનિક ચાલીસા પાઠ કાઉન્ટર અને વાચક - શુદ્ધ ગુજરાતી, હિન્દી અને અંગ્રેજીમાં.">
+    <meta name="twitter:image" content="https://chalishapath.netlify.app/img/social-preview.png">
+
+    <!-- App & PWA Icons & Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#B83B0E">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ચાલીસા પાઠ">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,500;0,700;1,500&family=Mukta+Vaani:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Confetti Canvas for Path Milestones -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="app-wrapper">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-inner">
+                <a href="#" class="brand" id="brand-home" aria-label="ચાલીસા પાઠ હોમ">
+                    <img src="img/logo.png" alt="ૐ" class="brand-logo" onerror="this.src='img/om.png';">
+                    <div class="brand-text">
+                        <span id="app-title-text" data-i18n="app_title">ચાલીસા પાઠ</span>
+                        <span class="brand-subtitle" data-i18n="app_subtitle">દૈનિક પાઠ સાથી</span>
+                    </div>
+                </a>
+
+                <div class="header-actions">
+                    <!-- Language selector -->
+                    <div class="lang-pills" role="group" aria-label="ભાષા પસંદગી">
+                        <button class="lang-btn active" data-lang="gu" id="btn-lang-gu">ગુજ</button>
+                        <button class="lang-btn" data-lang="hi" id="btn-lang-hi">हिं</button>
+                        <button class="lang-btn" data-lang="en" id="btn-lang-en">Eng</button>
+                    </div>
+
+                    <!-- Install PWA App Button (shown when installable or on iOS) -->
+                    <button class="btn-install-pwa" id="btn-install-app" style="display: none;" aria-label="એપ ઇન્સ્ટોલ કરો" title="એપ ઇન્સ્ટોલ કરો">
+                        <span class="install-pwa-icon">📲</span>
+                        <span class="install-pwa-text" data-i18n="install_app_btn">ઇન્સ્ટોલ</span>
+                    </button>
+
+                    <!-- Theme toggle -->
+                    <button class="icon-btn" id="btn-theme-toggle" aria-label="થીમ બદલો" title="થીમ બદલો">
+                        <span id="theme-icon">☀️</span>
+                    </button>
+
+                    <!-- Settings modal button -->
+                    <button class="icon-btn" id="btn-settings-open" aria-label="સેટિંગ્સ" title="સેટિંગ્સ">
+                        ⚙️
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ====================================================================
+             SCREEN 1: SETUP & CHALISA SELECTION
+             ==================================================================== -->
+        <main id="setup-screen" class="screen active">
+
+            <!-- Resume previous session card if found -->
+            <div id="resume-banner" class="resume-card" style="display: none;">
+                <div class="resume-text">
+                    <div class="resume-title" data-i18n="active_session">ચાલુ સત્ર બાકી છે!</div>
+                    <div id="resume-details" style="color: var(--text-muted);">૭ માંથી ૩ પાઠ પૂર્ણ થયા છે</div>
+                </div>
+                <button id="btn-resume-session" class="resume-btn" data-i18n="resume_btn">ચાલુ રાખો ▶</button>
+            </div>
+
+            <!-- Daily Stats Tracker -->
+            <div class="daily-summary-card">
+                <div class="daily-stat">
+                    <span class="daily-stat-icon">📿</span>
+                    <div class="daily-stat-info">
+                        <span class="daily-stat-label" data-i18n="today_total_label">આજના પૂર્ણ પાઠ</span>
+                        <span class="daily-stat-val" id="today-total-count">0</span>
+                    </div>
+                </div>
+                <div class="daily-stat">
+                    <span class="daily-stat-icon">✨</span>
+                    <div class="daily-stat-info">
+                        <span class="daily-stat-label" data-i18n="spiritual_grace">દૈનિક સંકલ્પ</span>
+                        <span class="daily-stat-val" style="font-size: 0.95rem; color: var(--secondary);" data-i18n="peace_of_mind">સુખ-શાંતિ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deity Selection Grid -->
+            <div class="section-label">
+                <span>🕉️</span> <span data-i18n="select_deity">ચાલીસા પસંદ કરો:</span>
+            </div>
+            <div class="deity-grid" id="deity-grid-container">
+                <!-- Cards injected by JS -->
+            </div>
+
+            <!-- Target Setup Card -->
+            <div class="config-card">
+                <div class="section-label" style="margin-top: 0;">
+                    <span>🎯</span> <span data-i18n="set_target">પાઠ સંકલ્પ સંખ્યા:</span>
+                </div>
+
+                <!-- Presets -->
+                <div class="presets-grid" id="presets-grid-container">
+                    <!-- Presets chips injected by JS -->
+                </div>
+
+                <!-- Custom input -->
+                <div class="custom-count-row">
+                    <label for="custom-count-input" class="custom-count-label" data-i18n="custom_count">અન્ય સંખ્યા:</label>
+                    <input type="number" id="custom-count-input" class="custom-count-input" min="1" max="1008" value="7">
+                </div>
+
+                <!-- Spiritual Tip / Info Box -->
+                <div class="info-box" id="deity-spiritual-info">
+                    <!-- Spiritual significance info injected by JS -->
+                </div>
+            </div>
+
+            <!-- Start Path Button -->
+            <button id="btn-start-path" class="btn-start">
+                <span style="font-size: 1.3rem;">🙏</span>
+                <span data-i18n="start_reading_btn">પાઠ શરૂ કરો</span>
+            </button>
+        </main>
+
+        <!-- ====================================================================
+             SCREEN 2: READING & COUNTING SCREEN
+             ==================================================================== -->
+        <section id="reading-screen" class="screen">
+            
+            <!-- Mini Status Bar -->
+            <div class="reader-status-bar">
+                <div class="reader-meta">
+                    <span id="reading-deity-symbol" class="reader-deity-icon">🙏</span>
+                    <div class="reader-title-group">
+                        <span id="reading-chalisa-title" class="reader-chalisa-title">શ્રી હનુમાન ચાલીસા</span>
+                        <span id="reading-status-summary" class="reader-count-badge">૭ માંથી ૧ પાઠ પૂર્ણ</span>
+                    </div>
+                </div>
+                <div class="reader-progress-wrap">
+                    <span id="progress-bead-pill" class="progress-pill">૧ / ૭</span>
+                </div>
+            </div>
+
+            <!-- Linear Progress Fill -->
+            <div class="progress-line-container">
+                <div id="progress-line-fill" class="progress-line-fill"></div>
+            </div>
+
+            <!-- Reader Controls Toolbar (Font scaler, Auto-scroll, Wake-lock) -->
+            <div class="reader-toolbar">
+                <div class="toolbar-group">
+                    <button class="tool-btn" id="btn-font-dec" title="અક્ષર નાના કરો">A-</button>
+                    <button class="tool-btn" id="btn-font-inc" title="અક્ષર મોટા કરો">A+</button>
+                    <button class="tool-btn" id="btn-autoscroll" title="સ્વચાલિત સ્ક્રોલ">
+                        <span id="autoscroll-icon">▶</span> <span data-i18n="autoscroll">સ્ક્રોલ</span>
+                    </button>
+                </div>
+                <div class="wakelock-indicator" id="wakelock-status-badge">
+                    <span class="wakelock-dot"></span>
+                    <span data-i18n="screen_awake">સ્ક્રીન ચાલુ</span>
+                </div>
+            </div>
+
+            <!-- Holy Reading Container -->
+            <div class="holy-text-card">
+                <div id="holy-verse-content" class="verse-content">
+                    <!-- Formatted Chalisa couplets and dohas injected by JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ====================================================================
+             SCREEN 3: CELEBRATION & COMPLETION
+             ==================================================================== -->
+        <section id="completion-screen" class="screen">
+            <div class="celebration-card">
+                <div class="celebration-icon">🎊</div>
+                <h1 class="celebration-title" data-i18n="congratulations">અભિનંદન!</h1>
+                <p class="celebration-subtitle" data-i18n="completion_msg">
+                    તમે તમારો નિર્ધારિત પવિત્ર ચાલીસા પાઠ સંકલ્પ શ્રદ્ધાપૂર્વક પૂર્ણ કર્યો છે.
+                </p>
+
+                <div class="stats-badge-box">
+                    <div class="stats-badge-count" id="completed-final-count">૭</div>
+                    <div class="stats-badge-desc">
+                        <div id="completed-chalisa-name" style="color: var(--secondary);">શ્રી હનુમાન ચાલીસા</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="paths_completed">પાઠ સફળતાપૂર્વક પૂર્ણ થયા</div>
+                    </div>
+                </div>
+
+                <div class="completion-actions">
+                    <button id="btn-share-whatsapp" class="btn-share-whatsapp">
+                        <span>📲</span> <span data-i18n="share_whatsapp">વોટ્સએપ પર શેર કરો</span>
+                    </button>
+                    <button id="btn-restart-app" class="btn-restart" data-i18n="start_new_path">
+                        નવો પાઠ શરૂ કરો
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             SETTINGS MODAL
+             ==================================================================== -->
+        <div class="modal-overlay" id="settings-modal" role="dialog" aria-modal="true">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-title" data-i18n="settings_title">સેટિંગ્સ</h2>
+                    <button class="modal-close" id="btn-settings-close" aria-label="બંધ કરો">✕</button>
+                </div>
+
+                <!-- Temple Bell Sound Toggle -->
+                <div class="setting-row">
+                    <div class="setting-label-grp">
+                        <span class="setting-title" data-i18n="bell_sound_title">દિવ્ય ઘંટનાદ અવાજ</span>
+                        <span class="setting-desc" data-i18n="bell_sound_desc">પાઠ પૂર્ણ થાય ત્યારે ઘંટ વગાડો</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-sound" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Haptic Vibration Toggle -->
+                <div class="setting-row">
+                    <div class="setting-label-grp">
+                        <span class="setting-title" data-i18n="vibration_title">મોબાઇલ વાઇબ્રેશન</span>
+                        <span class="setting-desc" data-i18n="vibration_desc">બટન દબાવવા પર હળવો વાઇબ્રેશન</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-vibrate" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Auto screen wake-lock -->
+                <div class="setting-row">
+                    <div class="setting-label-grp">
+                        <span class="setting-title" data-i18n="keep_awake_title">સ્ક્રીન સ્લીપ અટકાવો</span>
+                        <span class="setting-desc" data-i18n="keep_awake_desc">પાઠ દરમિયાન મોબાઇલ સ્ક્રીન ચાલુ રાખો</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-wakelock" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- App Install Option (PWA) -->
+                <div class="setting-row" id="setting-install-row" style="display: none; padding-top: 14px; border-top: 1px dashed var(--border-color);">
+                    <div class="setting-label-grp">
+                        <span class="setting-title" data-i18n="pwa_setting_title">મોબાઇલ એપ ઇન્સ્ટોલ કરો</span>
+                        <span class="setting-desc" data-i18n="pwa_setting_desc">હોમ સ્ક્રીન પર ઉમેરીને ઓફલાઇન વાપરો</span>
+                    </div>
+                    <button id="btn-settings-install" class="btn-settings-pwa" data-i18n="install_now_btn">
+                        ઇન્સ્ટોલ 📲
+                    </button>
+                </div>
+
+                <!-- Reset Today's Count -->
+                <div class="setting-row" style="padding-top: 18px;">
+                    <div class="setting-label-grp">
+                        <span class="setting-title" data-i18n="reset_stats_title">આજનો ડેટા સાફ કરો</span>
+                        <span class="setting-desc" data-i18n="reset_stats_desc">આજના ગણેલા પાઠ ૦ કરો</span>
+                    </div>
+                    <button id="btn-reset-stats" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 5px 12px; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer;">
+                        રીસેટ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====================================================================
+             CONFIRM EXIT MODAL
+             ==================================================================== -->
+        <div class="modal-overlay" id="exit-modal" role="dialog" aria-modal="true">
+            <div class="modal-card" style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 8px;">⚠️</div>
+                <h3 class="modal-title" style="margin-bottom: 8px;" data-i18n="exit_confirm_title">પાઠ સત્રમાંથી બહાર નીકળવું છે?</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;" data-i18n="exit_confirm_desc">
+                    તમારી વર્તમાન ગણતરી સચવાયેલી રહેશે જેથી તમે પાછળથી ચાલુ રાખી શકો છો.
+                </p>
+                <div style="display: flex; gap: 10px;">
+                    <button id="btn-exit-cancel" style="flex: 1; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 600; cursor: pointer;" data-i18n="cancel_btn">
+                        રદ કરો
+                    </button>
+                    <button id="btn-exit-confirm" style="flex: 1; padding: 12px; border-radius: var(--radius-sm); border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer;" data-i18n="yes_exit_btn">
+                        હા, બહાર નીકળો
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====================================================================
+             IOS "ADD TO HOME SCREEN" MODAL
+             ==================================================================== -->
+        <div class="modal-overlay" id="ios-install-modal" role="dialog" aria-modal="true">
+            <div class="modal-card ios-install-card">
+                <div class="ios-install-header">
+                    <img src="img/apple-touch-icon.png" alt="ૐ" class="ios-install-logo">
+                    <div style="flex: 1;">
+                        <h3 class="modal-title" style="font-size: 1.15rem; margin-bottom: 2px;" data-i18n="ios_install_title">ચાલીસા પાઠ એપ ઇન્સ્ટોલ કરો</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;" data-i18n="ios_install_sub">iPhone / iPad પર સીધા વાપરો</p>
+                    </div>
+                    <button class="modal-close-btn" id="btn-ios-install-close" aria-label="બંધ કરો">✕</button>
+                </div>
+
+                <div class="ios-steps">
+                    <div class="ios-step-row">
+                        <div class="ios-step-num">૧</div>
+                        <div class="ios-step-desc">
+                            <span data-i18n="ios_step1_txt">Safari બ્રાઉઝરમાં નીચે આપેલ શેર બટન દબાવો</span>
+                            <span class="ios-icon-hint" title="Share button">⎋</span>
+                        </div>
+                    </div>
+                    <div class="ios-step-row">
+                        <div class="ios-step-num">૨</div>
+                        <div class="ios-step-desc">
+                            <span data-i18n="ios_step2_txt">નીચે સ્ક્રોલ કરી <strong>'Add to Home Screen'</strong> પસંદ કરો</span>
+                            <span class="ios-icon-hint" title="Add to Home Screen">➕</span>
+                        </div>
+                    </div>
+                    <div class="ios-step-row">
+                        <div class="ios-step-num">૩</div>
+                        <div class="ios-step-desc">
+                            <span data-i18n="ios_step3_txt">ઉપર જમણી બાજુએ <strong>'Add'</strong> પર ટેપ કરો</span>
+                            <span class="ios-icon-hint" title="Add">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ios-offline-badge">
+                    <span>✨</span>
+                    <span data-i18n="ios_offline_note">ઇન્સ્ટોલ કર્યા પછી એપ ઇન્ટરનેટ વગર સંપૂર્ણપણે ચાલશે!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network / Offline status toast -->
+        <div id="network-toast" class="network-toast" role="status" aria-live="polite">
+            <span id="network-toast-icon">📶</span>
+            <span id="network-toast-text">ઓફલાઇન મોડ સક્રિય</span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>જય શ્રી રામ | હર હર મહાદેવ | જય મેલડી માત</p>
+            <p style="margin-top: 4px; font-size: 0.72rem;">&copy; ચાલીસા પાઠ કાઉન્ટર — ભક્તિ અને એકાગ્રતા માટે નિર્મિત</p>
+        </footer>
+
+    </div>
+
+    <!-- ====================================================================
+         STICKY BOTTOM THUMB CONTROLLER (ONE-HANDED MOBILE USABILITY)
+         ==================================================================== -->
+    <div class="sticky-bottom-bar" id="sticky-bottom-bar">
+        <div class="bottom-bar-inner">
+            <!-- Back / Exit -->
+            <button class="btn-exit-reader" id="btn-back-to-setup" aria-label="પાછા જાઓ" title="પાછા જાઓ">
+                ↩
+                <span data-i18n="back_label">પાછા</span>
+            </button>
+
+            <!-- Giant Primary +1 Count Button -->
+            <button class="btn-counter-primary" id="btn-count-increment" aria-label="એક પાઠ પૂર્ણ (+૧)">
+                <div class="counter-action-text">
+                    <span style="font-size: 1.4rem;">📿</span>
+                    <span data-i18n="tap_complete_path">+૧ પાઠ પૂર્ણ</span>
+                </div>
+                <div class="counter-badge-display" id="floating-count-badge">
+                    ૧ / ૭
+                </div>
+            </button>
+
+            <!-- Undo / Minus 1 -->
+            <button class="btn-sub-control" id="btn-count-decrement" aria-label="એક બાદ કરો (-૧)" title="ભૂલ સુધારો (-૧)">
+                -૧
+                <span data-i18n="undo_label">સુધારો</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- External JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
