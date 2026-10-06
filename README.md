@@ -70,7 +70,7 @@ This repository is pre-configured with [`netlify.toml`](./netlify.toml) for auto
    git add .
    git commit -m "Initial commit: Chalisa Path PWA"
    git branch -M main
-   git remote add origin https://github.com/<YOUR_USERNAME>/chalishapath.git
+   git remote add origin https://github.com/aniket-py1/chalishapath-.git
    git push -u origin main
    ```
 
